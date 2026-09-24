@@ -1,0 +1,34 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a plant scheduling/logistics coordination robot
+;; does crew scheduling, production/inventory logging and raw-materials supply
+;; for a textile, fur and leather products machine-operations crew; it never
+;; runs the machinery. Its physical work is raw-material logistics: loading
+;; fabric bolts onto the spreading-table feed and hauling bolt carts from the
+;; raw-materials store.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-8159"
+ :cases
+ [{:id :fabric-bolt-to-feed
+   :kind :manipulator
+   :procedure "arm lifts a fabric bolt (or bundle of hides) from the cart onto the raised feed cradle of the spreading table"
+   :params {:l1-m 0.60 :l2-m 0.55 :m1-kg 8.0 :m2-kg 5.0
+            :from [0.70 0.10] :to [0.40 0.80] :duration-s 3.0 :steps 500}
+   :sweep {:param :payload-kg :values [4.0 6.0 8.0 10.0 12.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 150.0 :basis "estimate: continuous shoulder torque of a ~10 kg payload collaborative arm"}
+   :boundary {:lo 0.5 :hi 40.0}}
+  {:id :bolt-cart-from-store
+   :kind :transport
+   :procedure "AMR hauls a cart of fabric bolts from the raw-materials store to the cutting floor"
+   :params {:mass-kg 80.0 :payload-kg 150.0 :v-max-mps 1.2 :a-max-mps2 0.5
+            :brake-decel-mps2 0.8 :drive-force-n 250.0 :crr 0.02
+            :cog-height-m 0.60 :support-half-length-m 0.35 :max-time-s 1200.0}
+   :sweep {:param :distance-m :values [30.0 60.0 90.0 120.0 150.0]}
+   :quantity :cycle-time-s
+   :limit {:max 90.0 :basis "estimate: a supply run inside the ~1.5 min spreading-table changeover"}
+   :boundary {:lo 5.0 :hi 400.0}}]}
