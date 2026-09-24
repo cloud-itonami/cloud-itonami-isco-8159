@@ -1,5 +1,5 @@
 (ns tflcoord.governor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [tflcoord.store :as store]
             [tflcoord.advisor :as advisor]
             [tflcoord.governor :as governor]))

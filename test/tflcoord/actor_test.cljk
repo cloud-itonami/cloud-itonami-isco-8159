@@ -1,5 +1,5 @@
 (ns tflcoord.actor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [tflcoord.actor :as actor]
             [tflcoord.store :as store]))
 
