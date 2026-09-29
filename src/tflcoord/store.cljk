@@ -1,7 +1,7 @@
 (ns tflcoord.store
   "SSoT for the ISCO-08 8159 textile, fur and leather products machine
   operators (not elsewhere classified) plant scheduling/logistics
-  coordination actor (itonami actor pattern, ADR-2607121000 / CLAUDE.md
+  coordination actor (itonami actor pattern, ADR-2607121000 / AGENTS.md
   Actors section; README's 'Robotics premise' — a plant scheduling/
   logistics coordination robot performs crew scheduling, production-
   run/inventory/progress-record logging and raw-materials supply-order
